@@ -1,0 +1,290 @@
+﻿<Page
+    x:Class="EZBudget.Views.TransactionsPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:EZBudget.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+	<Grid x:Name="MainGrid">
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="1*" />
+			<ColumnDefinition Width="1*" />
+		</Grid.ColumnDefinitions>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="50" />
+			<RowDefinition Height="100" />
+			<RowDefinition Height="1*" />
+		</Grid.RowDefinitions>
+		<Popup x:Name="AccountPopup"
+			   IsLightDismissEnabled="True"
+			   Grid.Column="1"
+			   Grid.Row="2">
+			<Border Background="#444"
+					HorizontalAlignment="Center"
+					VerticalAlignment="Center"
+					Width="300"
+					Height="Auto">
+				<StackPanel Margin="20"
+							HorizontalAlignment="Stretch">
+					<TextBlock Text="Enter Account Name:"
+							   Margin="5" />
+					<TextBox PlaceholderText="Account Name..."
+							 Text="{Binding AccountName, Mode=TwoWay}"
+							 Margin="5" />
+					<TextBlock Text="Enter Account Balance:"
+							   Margin="5" />
+					<TextBox PlaceholderText="100.00"
+							 Text="{Binding AccountBalance, Mode=TwoWay}"
+							 Margin="5" />
+					<Grid>
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="Auto" />
+							<ColumnDefinition Width="*" />
+							<ColumnDefinition Width="Auto" />
+						</Grid.ColumnDefinitions>
+						<Button Content="Add"
+								Command="{Binding AddAccountCommand, Mode=TwoWay}"
+								Grid.Column="0"/>
+						<Button Content="Cancel"
+								Click="ClosePopupClick"
+								Grid.Column="2"/>
+					</Grid>
+				</StackPanel>
+			</Border>
+		</Popup>
+		<Popup x:Name="TransactionPopup"
+			   IsLightDismissEnabled="True"
+			   Grid.Column="1"
+			   Grid.Row="2">
+			<Border Background="#444"
+					HorizontalAlignment="Center"
+					VerticalAlignment="Center"
+					Width="300"
+					Height="Auto">
+				<StackPanel Margin="20"
+							HorizontalAlignment="Stretch">
+					<TextBlock Text="Enter Transaction Description:"
+							   Margin="5" />
+					<TextBox PlaceholderText="Description..."
+							 Text="{Binding TransactionDescription, Mode=TwoWay}"
+							 Margin="5" />
+					<TextBlock Text="Enter Transaction Amount:"
+							   Margin="5" />
+					<TextBox PlaceholderText="$0.00"
+							 Text="{Binding TransactionAmount, Mode=TwoWay}"
+							 Margin="5" />
+					<TextBlock Text="Enter Transaction Date:"
+							   Margin="5" />
+					<TextBox PlaceholderText="Today?"
+							 Margin="5" />
+					<Grid>
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="1*" />
+							<ColumnDefinition Width="2*" />
+							<ColumnDefinition Width="1*" />
+						</Grid.ColumnDefinitions>
+						<Button Content="Add"
+								Command="{Binding AddTransactionCommand, Mode=TwoWay}"
+								HorizontalAlignment="Stretch"
+								Grid.Column="0"/>
+						<Button Content="Cancel"
+								Click="ClosePopupClick"
+								HorizontalAlignment="Stretch"
+								Grid.Column="2"/>
+					</Grid>
+				</StackPanel>
+			</Border>
+		</Popup>
+		<Popup x:Name="DeleteAccountPopup" 
+			   IsLightDismissEnabled="True"
+			   Margin="10"
+			   Grid.Column="1"
+			   Grid.Row="2">
+			<Border Background="#444"
+					HorizontalAlignment="Center"
+					VerticalAlignment="Center"
+					Width="300"
+					Height="Auto">
+				<Grid Margin="10">
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="1*" />
+						<ColumnDefinition Width="2*" />
+						<ColumnDefinition Width="1*" />
+					</Grid.ColumnDefinitions>
+					<Grid.RowDefinitions>
+						<RowDefinition Height="1*" />
+						<RowDefinition Height="1*" />
+					</Grid.RowDefinitions>
+					<TextBlock Text="Are you sure you want to delete this Account?"
+							   Margin="5,0,5,10"
+							   HorizontalAlignment="Center"
+							   TextWrapping="Wrap"
+							   Grid.Column="0"
+							   Grid.ColumnSpan="3"
+							   Grid.Row="0" />
+					<Button Content="Yep!"
+							Command="{Binding DeleteAccountCommand, Mode=TwoWay}"
+							HorizontalAlignment="Stretch"
+							Grid.Column="0"
+							Grid.Row="1" />
+					<Button Content="Nope!" 
+							Click="ClosePopupClick" 
+							HorizontalAlignment="Stretch"
+							Grid.Column="2"
+							Grid.Row="1" />
+				</Grid>
+			</Border>
+		</Popup>
+		<Popup x:Name="DeleteTransactionPopup" 
+			   IsLightDismissEnabled="True"
+			   Margin="10"
+			   Grid.Column="1"
+			   Grid.Row="2">
+			<Border Background="#444"
+					HorizontalAlignment="Center"
+					VerticalAlignment="Center"
+					Width="300"
+					Height="Auto">
+				<Grid Margin="10">
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="1*" />
+						<ColumnDefinition Width="2*" />
+						<ColumnDefinition Width="1*" />
+					</Grid.ColumnDefinitions>
+					<Grid.RowDefinitions>
+						<RowDefinition Height="1*" />
+						<RowDefinition Height="1*" />
+					</Grid.RowDefinitions>
+					<TextBlock Text="Are you sure you want to delete this Transaction?"
+							   HorizontalAlignment="Center"
+							   Margin="5,0,5,10"
+							   TextWrapping="Wrap"
+							   Grid.Column="0"
+							   Grid.ColumnSpan="3"
+							   Grid.Row="0" />
+					<Button Content="Yep!"
+							Command="{Binding DeleteTransactionCommand, Mode=TwoWay}"
+							HorizontalAlignment="Stretch"
+							Grid.Column="0"
+							Grid.Row="1" />
+					<Button Content="Nope!"
+							Click="ClosePopupClick"
+							HorizontalAlignment="Stretch"
+							Grid.Column="2"
+							Grid.Row="1" />
+				</Grid>
+			</Border>
+		</Popup>
+		<CommandBar Grid.Column="0" 
+					Grid.ColumnSpan="2"
+					Grid.Row="0" >
+			<AppBarButton Content="Add..." >
+				<AppBarButton.Flyout>
+					<MenuFlyout Placement="BottomEdgeAlignedRight">
+						<MenuFlyout.MenuFlyoutPresenterStyle>
+							<Style TargetType="MenuFlyoutPresenter">
+								<Setter Property="Margin" Value="0,-13,0,0" />
+							</Style>
+						</MenuFlyout.MenuFlyoutPresenterStyle>
+						<MenuFlyoutItem Text="Account" Click="MenuFlyout_Account" />
+						<MenuFlyoutItem Text="Transaction" Click="MenuFlyout_Transaction" />
+					</MenuFlyout>
+				</AppBarButton.Flyout>
+			</AppBarButton>
+			<AppBarButton Content="Edit..." />
+			<AppBarButton Content="Remove..." >
+				<AppBarButton.Flyout>
+					<MenuFlyout Placement="BottomEdgeAlignedRight">
+						<MenuFlyout.MenuFlyoutPresenterStyle>
+							<Style TargetType="MenuFlyoutPresenter">
+								<Setter Property="Margin" Value="0,-13,0,0" />
+							</Style>
+						</MenuFlyout.MenuFlyoutPresenterStyle>
+						<MenuFlyoutItem Text="Account" Click="DeleteAccount_Click" />
+						<MenuFlyoutItem Text="Transaction" Click="DeleteTransaction_Click" />
+					</MenuFlyout>
+				</AppBarButton.Flyout>
+			</AppBarButton>
+		</CommandBar>
+		<ListView x:Name="AccountList"
+				  ItemsSource="{Binding Accounts, Mode=OneWay}"
+				  SelectedIndex="{Binding AccountIndex, Mode=TwoWay}"
+				  ScrollViewer.HorizontalScrollMode="Enabled"
+				  ScrollViewer.HorizontalScrollBarVisibility="Hidden"
+				  ScrollViewer.VerticalScrollMode="Disabled"
+				  ScrollViewer.VerticalScrollBarVisibility="Hidden"
+				  BorderBrush="DarkGreen"
+				  BorderThickness="0,0,0,5"
+				  Grid.Column="0"
+				  Grid.ColumnSpan="2"
+				  Grid.Row="1" >
+			<ListView.ItemsPanel>
+				<ItemsPanelTemplate>
+					<ItemsStackPanel Orientation="Horizontal" />
+				</ItemsPanelTemplate>
+			</ListView.ItemsPanel>
+			<ListView.ItemTemplate>
+				<DataTemplate>
+					<Border BorderBrush="DarkGreen"
+							BorderThickness="1,0,1,0"
+							Margin="-12,0,-12,0"
+							VerticalAlignment="Stretch">
+						<Viewbox Stretch="Uniform"
+								 Height="100"
+								 Width="200">
+							<TextBlock Text="{Binding AccountName}"
+									   HorizontalTextAlignment="Center"
+									   VerticalAlignment="Center"
+									   Margin="10"
+								       TextAlignment="Center"
+								       TextWrapping="Wrap" />
+						</Viewbox>
+					</Border>
+				</DataTemplate>
+			</ListView.ItemTemplate>
+		</ListView>
+		<StackPanel Grid.Column="0" 
+					Grid.Row="2">
+			<Viewbox Height="50">
+				<TextBlock Text="{Binding TransactionsLabel, Mode=TwoWay}" 
+						   d:Text="Test" 
+						   Margin="5,0,5,0"
+						   HorizontalAlignment="Center" />
+			</Viewbox>
+			<ListView x:Name="TransactionList"
+				  ItemsSource="{Binding Transactions}"
+				  Margin="0,10,0,10">
+				<ListView.ItemTemplate>
+					<DataTemplate>
+						<Grid HorizontalAlignment="Center"
+						  Width="Auto">
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition Width="3*" />
+								<ColumnDefinition Width="2*" />
+							</Grid.ColumnDefinitions>
+							<Grid.RowDefinitions>
+								<RowDefinition Height="1*" />
+								<RowDefinition Height="1*" />
+							</Grid.RowDefinitions>
+							<TextBlock Text="{Binding Description}"
+								   Grid.Column="1"
+								   Grid.Row="0" />
+							<TextBlock Text="{Binding Amount}"
+								   Grid.Column="1"
+								   Grid.Row="1" />
+							<TextBlock Text="{Binding Date}" 
+								   Margin="10"
+								   Grid.Column="0"
+								   Grid.Row="0"
+								   Grid.RowSpan="2"
+								   VerticalAlignment="Center" />
+						</Grid>
+					</DataTemplate>
+				</ListView.ItemTemplate>
+			</ListView>
+		</StackPanel>
+	</Grid>
+</Page>

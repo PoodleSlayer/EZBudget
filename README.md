@@ -1,0 +1,3 @@
+# EZ Budget App 
+
+Simple personal budgeting app I'm using to teach a friend about UWP and C# in general, as well as a few different concepts. It's a work-in-progress and has a mix of code-behind, MVVM, and random IoC stuff to demonstrate these various ideas. It also has a really weird UI/UX but it's what my friend wanted the app to be like! My friend's project should be on GitHub somewhere but I think he is keeping it private for now... He is doing a more traditional XAML/code-behind approach since he is new to UWP.
